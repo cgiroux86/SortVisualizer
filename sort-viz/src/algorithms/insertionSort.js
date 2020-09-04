@@ -1,11 +1,7 @@
-export const insertionSort = (arr, setArr) => {
+export const insertionSort = (arr, setArr, sorting) => {
   for (let i = 0; i < arr.length; i++) {
     const current = arr[i];
     let j = i;
-    const copy1 = [...arr];
-    setTimeout(() => {
-      setArr(copy1);
-    }, 2000);
     while (j > 0 && current <= arr[j - 1]) {
       arr[j] = arr[j - 1];
       const copy = [...arr];
@@ -17,4 +13,5 @@ export const insertionSort = (arr, setArr) => {
     }
     arr[j] = current;
   }
+  sorting(false);
 };

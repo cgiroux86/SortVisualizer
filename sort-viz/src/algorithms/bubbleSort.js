@@ -1,16 +1,27 @@
-export const bubbleSort = (arr, setArr) => {
+export const bubbleSort = (arr, setArr, sorting) => {
+  let copy = [...arr];
+  let sorted = [];
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr.length - 1; j++) {
-      if (arr[j] > arr[i]) {
-        let p = arr[j];
-        arr[j] = arr[i];
-        arr[i] = p;
+      // sorted.push([i,j])
+      if (copy[j] > copy[i]) {
+        let p = copy[j];
+        copy[j] = copy[i];
+        copy[i] = p;
+        sorted.push([...copy]);
       }
-      const copy = [...arr];
-      setTimeout(() => {
-        setArr(copy);
-      }, 1000);
     }
+    handleTimeout(sorted, setArr);
   }
-  setArr(arr);
+
+  function handleTimeout(copy, setArr) {
+    if (!sorted.length) {
+      sorting(false);
+      return;
+    }
+    setArr(copy.shift());
+    setTimeout(() => {
+      handleTimeout(copy, setArr);
+    }, 1000);
+  }
 };
