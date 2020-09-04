@@ -1,5 +1,11 @@
-export const bubbleSort = (arr) => {
+export const bubbleSort = (arr, setArr) => {
+  const copy = [...arr];
   for (let i = 0; i < arr.length; i++) {
+    setTimeout(() => {
+      setArr(arr);
+      console.log(arr);
+      return;
+    }, 900);
     for (let j = 0; j < arr.length - 1; j++) {
       if (arr[j] > arr[i]) {
         let p = arr[j];
@@ -8,5 +14,6 @@ export const bubbleSort = (arr) => {
       }
     }
   }
-  return arr;
+
+  return copy;
 };
