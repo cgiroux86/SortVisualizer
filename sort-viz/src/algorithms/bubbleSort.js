@@ -1,27 +1,110 @@
-export const bubbleSort = (arr, setArr, sorting) => {
+export const bubbleSort = (
+  arr,
+  setArr,
+  sorting,
+  funcObj,
+  currentSorted,
+  setCurrentSorted,
+  setSwapping,
+  swapping
+) => {
   let copy = [...arr];
-  let sorted = [];
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr.length - 1; j++) {
-      // sorted.push([i,j])
-      if (copy[j] > copy[i]) {
-        let p = copy[j];
-        copy[j] = copy[i];
-        copy[i] = p;
-        sorted.push([...copy]);
+  let sorted = false;
+  let updates = [];
+  let total = 0;
+  while (!sorted) {
+    sorted = true;
+    for (let i = 0; i < arr.length - 1; i++) {
+      updates.push([i, i + 1]);
+      if (copy[i] > copy[i + 1]) {
+        updates.push([i, i + 1, true]);
+        sorted = false;
+        let p = copy[i];
+        copy[i] = copy[i + 1];
+        copy[i + 1] = p;
+        updates.push(copy.slice(0));
+        updates.push([]);
       }
     }
-    handleTimeout(sorted, setArr);
+    updates.push([true, arr.length - 1 - total]);
+    total++;
   }
-
-  function handleTimeout(copy, setArr) {
-    if (!sorted.length) {
-      sorting(false);
-      return;
-    }
-    setArr(copy.shift());
-    setTimeout(() => {
-      handleTimeout(copy, setArr);
-    }, 1000);
-  }
+  handleTimeout(
+    updates,
+    setArr,
+    sorting,
+    funcObj,
+    currentSorted,
+    setCurrentSorted,
+    setSwapping,
+    swapping,
+    arr
+  );
+  return copy;
 };
+
+function handleTimeout(
+  updates,
+  setArr,
+  sorting,
+  funcObj,
+  currentSorted,
+  setCurrentSorted,
+  setSwapping,
+  swapping,
+  arr
+) {
+  if (!updates.length) {
+    sorting(false);
+    setTimeout(() => {
+      setCurrentSorted(arr.map((_, i) => i));
+      setSwapping([]);
+    });
+    return;
+  }
+  funcToExec(
+    funcObj,
+    updates,
+    currentSorted,
+    setCurrentSorted,
+    setSwapping,
+    swapping
+  );
+  setTimeout(() => {
+    handleTimeout(
+      updates,
+      setArr,
+      sorting,
+      funcObj,
+      currentSorted,
+      setCurrentSorted,
+      setSwapping,
+      swapping,
+      arr
+    );
+  }, 10);
+}
+
+function funcToExec(
+  func,
+  updates,
+  currentSorted,
+  setCurrentSorted,
+  setSwapping,
+  swapping
+) {
+  const firstItem = updates[0];
+  if (firstItem.length > 3) {
+    return func.setArr(updates.shift());
+  }
+  if (firstItem.length === 0 || firstItem.length === 3) {
+    return func.setSwapping(updates.shift());
+  }
+  if (firstItem.length === 2 && firstItem[0] === true) {
+    setCurrentSorted(currentSorted.concat(updates.shift()));
+    return;
+  } else if (firstItem.length == 2) {
+    setSwapping(updates.shift());
+    return;
+  }
+}
