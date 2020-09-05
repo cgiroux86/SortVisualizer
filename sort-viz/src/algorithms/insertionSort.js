@@ -88,11 +88,9 @@ function funcToExec(
   const firstItem = updates[0];
   if (firstItem.length > 3) {
     return func.setArr(updates.shift());
-  }
-  if (firstItem.length === 0 || firstItem.length === 3) {
+  } else if (firstItem.length === 0 || firstItem.length === 3) {
     return func.setSwapping(updates.shift());
-  }
-  if (firstItem.length === 2 && firstItem[0] === true) {
+  } else if (firstItem.length === 2 && firstItem[0] === true) {
     setCurrentSorted(currentSorted.concat(updates.shift()));
     return;
   } else if (firstItem.length == 2) {
