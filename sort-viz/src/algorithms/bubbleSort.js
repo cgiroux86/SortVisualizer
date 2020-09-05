@@ -25,9 +25,9 @@ export const bubbleSort = (
         updates.push(copy.slice(0));
         updates.push([]);
       }
-      updates.push([true, copy.length - 1 - total]);
-      total++;
     }
+    updates.push([true, arr.length - 1 - total]);
+    total++;
   }
   handleTimeout(
     updates,
@@ -37,7 +37,8 @@ export const bubbleSort = (
     currentSorted,
     setCurrentSorted,
     setSwapping,
-    swapping
+    swapping,
+    arr
   );
   return copy;
 };
@@ -50,11 +51,15 @@ function handleTimeout(
   currentSorted,
   setCurrentSorted,
   setSwapping,
-  swapping
+  swapping,
+  arr
 ) {
   if (!updates.length) {
     sorting(false);
-    console.log("breaking out now");
+    setTimeout(() => {
+      setCurrentSorted(arr.map((_, i) => i));
+      setSwapping([]);
+    });
     return;
   }
   funcToExec(
@@ -74,9 +79,10 @@ function handleTimeout(
       currentSorted,
       setCurrentSorted,
       setSwapping,
-      swapping
+      swapping,
+      arr
     );
-  }, 90);
+  }, 10);
 }
 
 function funcToExec(
@@ -87,23 +93,18 @@ function funcToExec(
   setSwapping,
   swapping
 ) {
-  setTimeout(() => {
-    const firstItem = updates[0];
-    console.log(swapping);
-    if (firstItem.length > 3) {
-      return func.setArr(updates.shift());
-    }
-    if (firstItem.length === 0 || firstItem.length === 3) {
-      return func.setSwapping(updates.shift());
-    }
-    if (firstItem.length === 2 && firstItem[0] === true) {
-      setCurrentSorted(currentSorted.concat(updates.shift()));
-      return;
-    } else if (firstItem.length == 2) {
-      // setSwapping(swapping.concat(updates.shift()));
-      setSwapping(updates.shift());
-      console.log(currentSorted);
-      return;
-    }
-  }, 900);
+  const firstItem = updates[0];
+  if (firstItem.length > 3) {
+    return func.setArr(updates.shift());
+  }
+  if (firstItem.length === 0 || firstItem.length === 3) {
+    return func.setSwapping(updates.shift());
+  }
+  if (firstItem.length === 2 && firstItem[0] === true) {
+    setCurrentSorted(currentSorted.concat(updates.shift()));
+    return;
+  } else if (firstItem.length == 2) {
+    setSwapping(updates.shift());
+    return;
+  }
 }

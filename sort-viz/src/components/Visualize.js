@@ -7,6 +7,11 @@ export default function Visualize({ array, swapping, currentSorted }) {
   swappingRef.current = swapping;
   const currentSortedRef = useRef();
   currentSortedRef.current = currentSorted;
+  const [inorder, setInorder] = useState([]);
+
+  useEffect(() => {
+    setInorder([...inorder, ...currentSorted]);
+  }, [currentSorted]);
 
   return (
     <div className="container">
@@ -20,8 +25,8 @@ export default function Visualize({ array, swapping, currentSorted }) {
               border: " 1px solid purple",
               backgroundColor: swapping.includes(i)
                 ? "yellow"
-                : currentSorted.includes(i)
-                ? "sky blue"
+                : inorder.includes(i)
+                ? "lime"
                 : "magenta",
             }}
           ></div>

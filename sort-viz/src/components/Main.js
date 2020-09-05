@@ -4,7 +4,7 @@ import Visualize from "./Visualize";
 import { generate } from "../functions/generateArray";
 
 export default function Main() {
-  const [array, setArray] = useState(generate([], 50));
+  const [array, setArray] = useState(generate([], 100));
   const [swapping, setSwapping] = useState([]);
   const [currentSorted, setCurrentSorted] = useState([]);
   const [sorting, setSorting] = useState(false);
