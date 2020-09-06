@@ -1,33 +1,12 @@
-function merge(arr, start, mid, end) {
-  console.log(arr, mid);
-  let startPointer = mid + 1;
-  if (arr[mid] <= arr[startPointer]) {
+let sorted = [];
+
+function recurse(str) {
+  if (!str.length) {
     return;
   }
-  while (start <= mid && startPointer <= end) {
-    if (arr[start] <= arr[startPointer]) start++;
-    else {
-      let val = arr[startPointer];
-      let idx = startPointer;
-      while (idx != start) {
-        arr[idx] = arr[idx - 1];
-        idx--;
-      }
-      arr[start] = val;
-      start++;
-      mid++;
-      startPointer++;
-    }
-  }
+  sorted.push(str.slice(0, 2));
+  console.log(sorted);
+  recurse(str.slice(2));
 }
 
-function mergeSortIP(arr, left, right) {
-  if (left < right) {
-    let mid = Math.floor((left + right) / 2);
-    mergeSortIP(arr, left, mid);
-    mergeSortIP(arr, mid + 1, right);
-    merge(arr, left, mid, right);
-  }
-}
-const array = [9, 3, 1, 6, 5, 2, 4, 8, 7];
-console.log(mergeSortIP(array, 0, array.length));
+recurse("teststring");
