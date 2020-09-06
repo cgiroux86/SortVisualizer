@@ -2,7 +2,7 @@ const updates = [];
 
 export function quickSort(arr, l, h, funcObj, sorting) {
   let sorted = _quickSort(arr.slice(), l, h);
-  handleTimeOut(funcObj, sorting);
+  handleTimeOut(funcObj, sorting, arr);
   return sorted;
 }
 function partition(items, left, right) {
@@ -44,25 +44,24 @@ function _quickSort(items, left, right) {
   }
 }
 
-function handleTimeOut(funcObj, sorting) {
-  console.log(funcObj, "funcObj");
+function handleTimeOut(funcObj, sorting, arr) {
   function fnToCall(array) {
-    console.log(array);
     return array[0].length > 3
       ? funcObj.setArr(array.shift())
       : array[0].length === 3 && array[0][2] === true
-      ? funcObj.currentSorted(array.shift())
-      : funcObj.setSwapping(array.shift());
+      ? funcObj.setSwapping(array.shift())
+      : funcObj.currentSorted(array.shift());
   }
   if (!updates.length) {
-    funcObj.setSwapping([]);
-    sorting(false);
+    setTimeout(() => {
+      funcObj.setSwapping([]);
+      funcObj.currentSorted(arr.map((_, i) => i));
+      sorting(false);
+    }, 200);
     return;
   }
   fnToCall(updates);
   setTimeout(() => {
-    handleTimeOut(funcObj, sorting);
+    handleTimeOut(funcObj, sorting, arr);
   }, 100);
 }
-// let array = [6, 8, 3, 2, 2, 1, 5, 7, 0, 9];
-// console.log(quickSort(array, 0, array.length - 1));
