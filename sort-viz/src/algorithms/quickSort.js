@@ -45,9 +45,7 @@ function _quickSort(items, left, right) {
 }
 
 function handleTimeOut(funcObj, sorting, arr) {
-  console.log(funcObj, "funcObj");
   function fnToCall(array) {
-    console.log(array);
     return array[0].length > 3
       ? funcObj.setArr(array.shift())
       : array[0].length === 3 && array[0][2] === true
