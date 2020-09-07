@@ -24,8 +24,8 @@ function partition(items, left, right) {
       i++;
       j--;
     }
+    updates.push(items.slice());
   }
-  updates.push(items.slice());
   return i;
 }
 
@@ -45,7 +45,9 @@ function _quickSort(items, left, right) {
 }
 
 function handleTimeOut(funcObj, sorting, arr) {
+  console.log(funcObj, "funcObj");
   function fnToCall(array) {
+    console.log(array);
     return array[0].length > 3
       ? funcObj.setArr(array.shift())
       : array[0].length === 3 && array[0][2] === true
@@ -63,5 +65,7 @@ function handleTimeOut(funcObj, sorting, arr) {
   fnToCall(updates);
   setTimeout(() => {
     handleTimeOut(funcObj, sorting, arr);
-  }, 100);
+  }, 200);
 }
+// let array = [6, 8, 3, 2, 2, 1, 5, 7, 0, 9];
+// console.log(quickSort(array, 0, array.length - 1));
