@@ -21,6 +21,7 @@ export function mergeSort(
     setSorting,
     funcObj
   );
+  console.log("func obj", funcObj);
   handleTimeout(updates, funcObj, array, setSorting);
 }
 
@@ -79,6 +80,7 @@ function merge(arr1, arr2, start, end, startArr, updates) {
   return arr.concat(arr1).concat(arr2);
 }
 function handleTimeout(updates, funcObj, arr, sorting) {
+  console.log("func obj", funcObj);
   function fnToCall(updated) {
     if (updated[0].length > 3) return "SET";
     if (updated[0].length === 3 && updated[0][2] === true) return "SWAP";
@@ -111,5 +113,5 @@ function handleTimeout(updates, funcObj, arr, sorting) {
   }
   setTimeout(() => {
     handleTimeout(updates, funcObj, arr, sorting);
-  }, 100);
+  }, 50);
 }

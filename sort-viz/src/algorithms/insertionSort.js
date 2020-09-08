@@ -11,17 +11,17 @@ export const insertionSort = (
   const updates = [];
   const copy = [...arr];
   for (let i = 0; i < arr.length; i++) {
-    const current = arr[i];
+    const current = copy[i];
     let j = i;
     updates.push([i]);
-    while (j > 0 && current <= arr[j - 1]) {
-      arr[j] = arr[j - 1];
+    while (j > 0 && current <= copy[j - 1]) {
+      copy[j] = copy[j - 1];
       updates.push([i, j]);
       j--;
     }
-    arr[j] = current;
+    copy[j] = current;
     updates.push([i, j, true]);
-    updates.push(arr.slice(0));
+    updates.push(copy.slice(0));
   }
   handleTimeout(
     updates,
@@ -34,7 +34,6 @@ export const insertionSort = (
     swapping,
     arr
   );
-  console.log(arr);
   return copy;
 };
 function handleTimeout(
@@ -87,9 +86,12 @@ function funcToExec(
 ) {
   const firstItem = updates[0];
   if (firstItem.length > 3) {
-    return func.setArr(updates.shift());
+    console.log("first item", firstItem);
+    func.setArr(updates.shift());
+    return;
   } else if (firstItem.length === 0 || firstItem.length === 3) {
-    return func.setSwapping(updates.shift());
+    func.setSwapping(updates.shift());
+    return;
   } else if (firstItem.length === 2 && firstItem[0] === true) {
     setCurrentSorted(currentSorted.concat(updates.shift()));
     return;

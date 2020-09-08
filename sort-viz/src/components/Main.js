@@ -4,7 +4,7 @@ import Visualize from "./Visualize";
 import { generate } from "../functions/generateArray";
 
 export default function Main() {
-  const [array, setArray] = useState(generate([], 50));
+  const [array, setArray] = useState(generate([], 100));
   const [swapping, setSwapping] = useState([]);
   const [currentSorted, setCurrentSorted] = useState([]);
   const [sorting, setSorting] = useState(false);
@@ -15,7 +15,7 @@ export default function Main() {
   });
 
   return (
-    <div>
+    <div className="main_container">
       <Header
         array={array}
         setArray={setArray}
@@ -27,12 +27,14 @@ export default function Main() {
         currentSorted={currentSorted}
         swapping={swapping}
       />
-      <Visualize
-        array={array}
-        setArray={setArray}
-        swapping={swapping}
-        currentSorted={currentSorted}
-      />
+      <div className="graph_container">
+        <Visualize
+          array={array}
+          setArray={setArray}
+          swapping={swapping}
+          currentSorted={currentSorted}
+        />
+      </div>
     </div>
   );
 }

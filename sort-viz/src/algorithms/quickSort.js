@@ -1,8 +1,18 @@
 const updates = [];
 
-export function quickSort(arr, l, h, funcObj, sorting) {
-  let sorted = _quickSort(arr.slice(), l, h);
-  handleTimeOut(funcObj, sorting, arr);
+export function quickSort(
+  array,
+  setArray,
+  setSorting,
+  funcObj,
+  currentSorted,
+  setCurrentSorted,
+  setSwapping,
+  swapping
+) {
+  let arr = array.slice();
+  let sorted = _quickSort(arr, 0, arr.length - 1);
+  handleTimeOut(funcObj, setSorting, arr);
   return sorted;
 }
 function partition(items, left, right) {
@@ -63,7 +73,7 @@ function handleTimeOut(funcObj, sorting, arr) {
   fnToCall(updates);
   setTimeout(() => {
     handleTimeOut(funcObj, sorting, arr);
-  }, 200);
+  }, 50);
 }
 // let array = [6, 8, 3, 2, 2, 1, 5, 7, 0, 9];
 // console.log(quickSort(array, 0, array.length - 1));

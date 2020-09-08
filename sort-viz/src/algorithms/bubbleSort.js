@@ -82,7 +82,7 @@ function handleTimeout(
       swapping,
       arr
     );
-  }, 10);
+  }, 100);
 }
 
 function funcToExec(
