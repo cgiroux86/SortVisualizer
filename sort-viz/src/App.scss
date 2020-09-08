@@ -46,8 +46,12 @@
   width: 90%;
   margin: 2% auto;
   align-items: center;
+  border: 1px solid red;
 }
 .compare_item {
   width: 40%;
   box-shadow: 5px 5px 5px 6px grey;
+}
+.compare_wrapper {
+  border: 1px solid orange;
 }

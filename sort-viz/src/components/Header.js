@@ -5,6 +5,8 @@ import { insertionSort } from "../algorithms/insertionSort";
 import { selectionSort } from "../algorithms/selectionSort";
 import { mergeSort } from "../algorithms/mergeSort.js";
 import { quickSort } from "../algorithms/quickSort";
+import Compare from "./Compare";
+
 const algorithms = [
   ["Merge Sort", mergeSort],
   ["Bubble Sort", bubbleSort],
@@ -12,6 +14,7 @@ const algorithms = [
   ["Quick Sort", quickSort],
   ["Selection Sort", selectionSort],
 ];
+
 export default function Header({
   setArray,
   array,
@@ -23,7 +26,7 @@ export default function Header({
   setSwapping,
   swapping,
 }) {
-  const [fnToCall, setFnToCall] = useState({});
+  // const [fnToCall, setFnToCall] = useState({});
   const arrayRef = useRef();
   arrayRef.current = array;
   const swappingRef = useRef();
@@ -31,29 +34,29 @@ export default function Header({
   const sortedRef = useRef();
   sortedRef.current = currentSorted;
 
-  const handleStart = (algo) => {
-    setFnToCall({ algo });
-    setSorting(true);
-  };
-  useEffect(() => {
-    sorting &&
-      fnToCall.algo(
-        array,
-        setArray,
-        setSorting,
-        funcObj,
-        currentSorted,
-        setCurrentSorted,
-        setSwapping,
-        swapping
-      );
-  }, [sorting]);
+  // const handleStart = (algo) => {
+  //   setFnToCall({ algo });
+  //   setSorting(true);
+  // // };
+  // useEffect(() => {
+  //   sorting &&
+  //     fnToCall.algo(
+  //       array,
+  //       setArray,
+  //       setSorting,
+  //       funcObj,
+  //       currentSorted,
+  //       setCurrentSorted,
+  //       setSwapping,
+  //       swapping
+  //     );
+  // }, [sorting]);
 
   return (
     <div className="header">
       <div className="title">Sorting Visualizer</div>
       <div className="button_container">
-        {algorithms.map((algo) => {
+        {/* {algorithms.map((algo) => {
           return (
             <div key={algo[0]}>
               <div onClick={() => handleStart(algo[1])} className="algo">
@@ -61,7 +64,7 @@ export default function Header({
               </div>
             </div>
           );
-        })}
+        })} */}
       </div>
     </div>
   );
