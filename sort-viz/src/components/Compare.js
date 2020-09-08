@@ -17,7 +17,7 @@ export default function Compare({
         <div className="compare_item">
           <Visualize
             id={1}
-            array={copiedArray1}
+            arr={copiedArray1}
             setArray={setArray}
             swapping={swapping}
             currentSorted={currentSorted}
@@ -29,7 +29,7 @@ export default function Compare({
         <div className="compare_item">
           <Visualize
             id={2}
-            array={copiedArray2}
+            arr={copiedArray2}
             setArray={setArray}
             swapping={swapping}
             currentSorted={currentSorted}

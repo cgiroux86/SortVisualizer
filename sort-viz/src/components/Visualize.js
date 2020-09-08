@@ -1,26 +1,36 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function Visualize({
-  array,
-  swapping,
-  currentSorted,
-  compare,
-  algorithms,
-  handleStart,
-}) {
-  const sortedRef = useRef();
-  sortedRef.current = array;
-  const swappingRef = useRef();
-  swappingRef.current = swapping;
-  const currentSortedRef = useRef();
-  currentSortedRef.current = currentSorted;
+export default function Visualize({ arr, compare, algorithms }) {
   const [inorder, setInorder] = useState([]);
-  const copiedArray1 = array.slice();
-  const copiedArray2 = array.slice();
+  const [fnToCall, setFnToCall] = useState({});
+  const [array, setArray] = useState(arr);
+  const [swapping, setSwapping] = useState([]);
+  const [currentSorted, setCurrentSorted] = useState([]);
+  const [sorting, setSorting] = useState(false);
+  const [funcObj, setFuncObj] = useState({
+    setArr: setArray,
+    setSwapping: setSwapping,
+    currentSorted: setCurrentSorted,
+  });
+
+  const handleStart = (algo) => {
+    setFnToCall({ algo });
+    setSorting(true);
+  };
 
   useEffect(() => {
-    setInorder([...inorder, ...currentSorted]);
-  }, [currentSorted]);
+    sorting &&
+      fnToCall.algo(
+        array,
+        setArray,
+        setSorting,
+        funcObj,
+        currentSorted,
+        setCurrentSorted,
+        setSwapping,
+        swapping
+      );
+  }, [sorting]);
 
   return (
     <div>
@@ -36,7 +46,7 @@ export default function Visualize({
         })}
       </div>
       <div className="container">
-        {array.length &&
+        {array &&
           array.map((el, i) => (
             <div
               key={i}

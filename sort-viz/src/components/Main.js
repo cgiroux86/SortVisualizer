@@ -11,16 +11,11 @@ import { quickSort } from "../algorithms/quickSort";
 
 export default function Main() {
   const [array, setArray] = useState(generate([], 100));
-  const [swapping, setSwapping] = useState([]);
-  const [currentSorted, setCurrentSorted] = useState([]);
-  const [sorting, setSorting] = useState(false);
+  // const [swapping, setSwapping] = useState([]);
+  // const [currentSorted, setCurrentSorted] = useState([]);
+
   const [compare, setCompare] = useState(true);
   const [fnToCall, setFnToCall] = useState({});
-  const [funcObj, setFuncObj] = useState({
-    setArr: setArray,
-    setSwapping: setSwapping,
-    currentSorted: setCurrentSorted,
-  });
 
   const algorithms = [
     ["Merge Sort", mergeSort],
@@ -30,45 +25,27 @@ export default function Main() {
     ["Selection Sort", selectionSort],
   ];
 
-  const handleStart = (algo) => {
-    setFnToCall({ algo });
-    setSorting(true);
-  };
-
-  useEffect(() => {
-    sorting &&
-      fnToCall.algo(
-        array,
-        setArray,
-        setSorting,
-        funcObj,
-        currentSorted,
-        setCurrentSorted,
-        setSwapping,
-        swapping
-      );
-  }, [sorting]);
+  // useEffect(() => {
+  //   sorting &&
+  //     fnToCall.algo(
+  //       array,
+  //       setArray,
+  //       setSorting,
+  //       funcObj,
+  //       currentSorted,
+  //       setCurrentSorted,
+  //       setSwapping,
+  //       swapping
+  //     );
+  // }, [sorting]);
 
   return (
     <div className="main_container">
-      <Header
-        array={array}
-        setArray={setArray}
-        setSwapping={setSwapping}
-        setCurrentSorted={setCurrentSorted}
-        funcObj={funcObj}
-        setSorting={setSorting}
-        sorting={sorting}
-        currentSorted={currentSorted}
-        swapping={swapping}
-      />
+      <Header />
       {!compare ? (
         <div className="graph_container">
           <Visualize
-            array={array}
-            setArray={setArray}
-            swapping={swapping}
-            currentSorted={currentSorted}
+          // array={array}
           />
         </div>
       ) : (
@@ -76,11 +53,8 @@ export default function Main() {
           <Compare
             array={array}
             setArray={setArray}
-            swapping={swapping}
-            currentSorted={currentSorted}
             compare={compare}
             algorithms={algorithms}
-            handleStart={handleStart}
           />
         </div>
       )}
