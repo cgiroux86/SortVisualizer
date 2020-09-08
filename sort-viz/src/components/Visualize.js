@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-export default function Visualize({ array, swapping, currentSorted }) {
+export default function Visualize({ array, swapping, currentSorted, compare }) {
   const sortedRef = useRef();
   sortedRef.current = array;
   const swappingRef = useRef();
@@ -20,7 +20,7 @@ export default function Visualize({ array, swapping, currentSorted }) {
           <div
             key={i}
             style={{
-              width: "0.5rem",
+              width: compare ? "0.1rem" : "0.5rem",
               height: el,
               border: " 1px solid purple",
               backgroundColor: swapping.includes(i)

@@ -1,14 +1,19 @@
 .header {
   font-size: 100px;
   color: lime;
-  background: navy;
-  height: 10vh;
+  background: #3003fc;
+  height: auto;
+  text-align: center;
+  border: 2px solid yellow;
   display: flex;
+  flex-direction: column;
 }
 .title {
-  font-size: 2rem;
+  font-size: 3rem;
   color: whitesmoke;
   text-align: center;
+  letter-spacing: 0.2rem;
+  margin: 5px auto;
 }
 
 .container {
@@ -21,4 +26,28 @@
 .graph_container {
   border: 1px solid red;
   margin: 5% auto;
+}
+.button_container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 70%;
+  margin: 1% auto;
+}
+.algo {
+  font-size: 1rem;
+  color: white;
+  background: navy;
+  padding: 1rem;
+  cursor: pointer;
+}
+.compare {
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+  margin: 2% auto;
+  align-items: center;
+}
+.compare_item {
+  width: 40%;
+  box-shadow: 5px 5px 5px 6px grey;
 }

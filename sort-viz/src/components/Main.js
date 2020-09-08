@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import Visualize from "./Visualize";
+import Compare from "./Compare";
 import { generate } from "../functions/generateArray";
 
 export default function Main() {
@@ -8,6 +9,7 @@ export default function Main() {
   const [swapping, setSwapping] = useState([]);
   const [currentSorted, setCurrentSorted] = useState([]);
   const [sorting, setSorting] = useState(false);
+  const [compare, setCompare] = useState(true);
   const [funcObj, setFuncObj] = useState({
     setArr: setArray,
     setSwapping: setSwapping,
@@ -27,14 +29,26 @@ export default function Main() {
         currentSorted={currentSorted}
         swapping={swapping}
       />
-      <div className="graph_container">
-        <Visualize
-          array={array}
-          setArray={setArray}
-          swapping={swapping}
-          currentSorted={currentSorted}
-        />
-      </div>
+      {!compare ? (
+        <div className="graph_container">
+          <Visualize
+            array={array}
+            setArray={setArray}
+            swapping={swapping}
+            currentSorted={currentSorted}
+          />
+        </div>
+      ) : (
+        <div>
+          <Compare
+            array={array}
+            setArray={setArray}
+            swapping={swapping}
+            currentSorted={currentSorted}
+            compare={compare}
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -36,7 +36,6 @@ export default function Header({
     setSorting(true);
   };
   useEffect(() => {
-    // fnToCall(array, 0, array.length - 1, funcObj, setSorting);
     sorting &&
       fnToCall.algo(
         array,
@@ -53,14 +52,17 @@ export default function Header({
   return (
     <div className="header">
       <div className="title">Sorting Visualizer</div>
-      <Button onClick={() => handleStart()}>Start Sort!</Button>
-      {algorithms.map((algo) => {
-        return (
-          <div key={algo[0]}>
-            <Button onClick={() => handleStart(algo[1])}>{algo[0]}</Button>
-          </div>
-        );
-      })}
+      <div className="button_container">
+        {algorithms.map((algo) => {
+          return (
+            <div key={algo[0]}>
+              <div onClick={() => handleStart(algo[1])} className="algo">
+                {algo[0]}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
