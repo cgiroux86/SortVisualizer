@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function Visualize({ arr, compare, algorithms }) {
+export default function Visualize({ arr, compare, algorithms, speed, size }) {
   const [inorder, setInorder] = useState([]);
   const [fnToCall, setFnToCall] = useState({});
   const [array, setArray] = useState(arr);
@@ -19,6 +19,14 @@ export default function Visualize({ arr, compare, algorithms }) {
   };
 
   useEffect(() => {
+    setArray(arr.slice());
+  }, [arr]);
+
+  useEffect(() => {
+    setInorder([...currentSorted, ...inorder]);
+  }, [currentSorted]);
+
+  useEffect(() => {
     sorting &&
       fnToCall.algo(
         array,
@@ -28,7 +36,8 @@ export default function Visualize({ arr, compare, algorithms }) {
         currentSorted,
         setCurrentSorted,
         setSwapping,
-        swapping
+        swapping,
+        speed
       );
   }, [sorting]);
 
@@ -58,7 +67,7 @@ export default function Visualize({ arr, compare, algorithms }) {
                   ? "yellow"
                   : inorder.includes(i)
                   ? "lime"
-                  : "magenta",
+                  : "#00dbfc",
               }}
             ></div>
           ))}

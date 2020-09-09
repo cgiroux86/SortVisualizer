@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Visualize from "./Visualize";
 
 export default function Compare({
@@ -8,9 +8,16 @@ export default function Compare({
   currentSorted,
   algorithms,
   handleStart,
+  speed,
 }) {
-  const copiedArray1 = array.slice();
-  const copiedArray2 = array.slice();
+  const [copiedArray1, setCopiedArray1] = useState(array.slice());
+  const [copiedArray2, setCopiedArray2] = useState(array.slice());
+
+  useEffect(() => {
+    setCopiedArray1(array.slice());
+    setCopiedArray2(array.slice());
+  }, [array]);
+
   return (
     <div>
       <div className="compare">
@@ -23,6 +30,7 @@ export default function Compare({
             currentSorted={currentSorted}
             algorithms={algorithms}
             handleStart={handleStart}
+            speed={speed}
           />
         </div>
 
@@ -35,6 +43,7 @@ export default function Compare({
             currentSorted={currentSorted}
             algorithms={algorithms}
             handleStart={handleStart}
+            speed={speed}
           />
         </div>
       </div>

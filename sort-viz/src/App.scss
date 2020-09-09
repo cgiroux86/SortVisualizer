@@ -1,15 +1,14 @@
 .header {
-  font-size: 100px;
   color: lime;
-  background: #3003fc;
+  background: #00638a;
   height: auto;
   text-align: center;
-  border: 2px solid yellow;
+  border: 2px solid whitesmoke;
   display: flex;
   flex-direction: column;
 }
 .title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: whitesmoke;
   text-align: center;
   letter-spacing: 0.2rem;
@@ -30,14 +29,16 @@
 .button_container {
   display: flex;
   justify-content: space-evenly;
-  width: 70%;
-  margin: 1% auto;
+  width: 90%;
+  margin: 3% auto;
 }
 .algo {
   font-size: 1rem;
+  font-weight: bold;
   color: white;
-  background: navy;
-  padding: 1rem;
+  background: #00778a;
+  border-radius: 5px;
+  padding: 0.3rem;
   cursor: pointer;
 }
 .compare {
@@ -46,7 +47,6 @@
   width: 90%;
   margin: 2% auto;
   align-items: center;
-  border: 1px solid red;
 }
 .compare_item {
   width: 40%;
@@ -54,4 +54,35 @@
 }
 .compare_wrapper {
   border: 1px solid orange;
+}
+
+.options {
+  display: flex;
+  justify-content: space-evenly;
+  border: 1px solid magenta;
+  width: 90%;
+  margin: 0 auto;
+}
+.slider_wrapper {
+  border: 1px solid lime;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  left: 150px;
+  width: 50%;
+}
+.tabs_container {
+  display: flex;
+  justify-content: space-around;
+  width: 20%;
+  align-items: flex-end;
+}
+.tabs {
+  background: navy;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: 50%;
 }

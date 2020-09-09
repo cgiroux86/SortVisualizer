@@ -6,7 +6,8 @@ export const bubbleSort = (
   currentSorted,
   setCurrentSorted,
   setSwapping,
-  swapping
+  swapping,
+  speed
 ) => {
   let copy = [...arr];
   let sorted = false;
@@ -38,7 +39,8 @@ export const bubbleSort = (
     setCurrentSorted,
     setSwapping,
     swapping,
-    arr
+    arr,
+    speed
   );
   return copy;
 };
@@ -52,7 +54,8 @@ function handleTimeout(
   setCurrentSorted,
   setSwapping,
   swapping,
-  arr
+  arr,
+  speed
 ) {
   if (!updates.length) {
     sorting(false);
@@ -80,9 +83,10 @@ function handleTimeout(
       setCurrentSorted,
       setSwapping,
       swapping,
-      arr
+      arr,
+      speed
     );
-  }, 100);
+  }, speed);
 }
 
 function funcToExec(

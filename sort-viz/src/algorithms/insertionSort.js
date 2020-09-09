@@ -6,7 +6,8 @@ export const insertionSort = (
   currentSorted,
   setCurrentSorted,
   setSwapping,
-  swapping
+  swapping,
+  speed
 ) => {
   const updates = [];
   const copy = [...arr];
@@ -32,7 +33,8 @@ export const insertionSort = (
     setCurrentSorted,
     setSwapping,
     swapping,
-    arr
+    arr,
+    speed
   );
   return copy;
 };
@@ -45,7 +47,8 @@ function handleTimeout(
   setCurrentSorted,
   setSwapping,
   swapping,
-  arr
+  arr,
+  speed
 ) {
   if (!updates.length) {
     sorting(false);
@@ -71,9 +74,10 @@ function handleTimeout(
       setCurrentSorted,
       setSwapping,
       swapping,
-      arr
+      arr,
+      speed
     );
-  }, 100);
+  }, speed);
 }
 
 function funcToExec(

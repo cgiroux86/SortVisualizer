@@ -6,7 +6,8 @@ export function mergeSort(
   currentSorted,
   setCurrentSorted,
   setSwapping,
-  swappin
+  swapping,
+  speed
 ) {
   const array = arr.slice();
   const updates = [];
@@ -22,7 +23,7 @@ export function mergeSort(
     funcObj
   );
   console.log("func obj", funcObj);
-  handleTimeout(updates, funcObj, array, setSorting);
+  handleTimeout(updates, funcObj, array, setSorting, speed);
 }
 
 function _mergeSort(arr, updates, start, end, startArr, sorting, funcObj) {
@@ -79,7 +80,7 @@ function merge(arr1, arr2, start, end, startArr, updates) {
   updates.push([]);
   return arr.concat(arr1).concat(arr2);
 }
-function handleTimeout(updates, funcObj, arr, sorting) {
+function handleTimeout(updates, funcObj, arr, sorting, speed) {
   console.log("func obj", funcObj);
   function fnToCall(updated) {
     if (updated[0].length > 3) return "SET";
@@ -112,6 +113,6 @@ function handleTimeout(updates, funcObj, arr, sorting) {
     }
   }
   setTimeout(() => {
-    handleTimeout(updates, funcObj, arr, sorting);
-  }, 50);
+    handleTimeout(updates, funcObj, arr, sorting, speed);
+  }, speed);
 }

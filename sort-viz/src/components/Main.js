@@ -10,12 +10,10 @@ import { mergeSort } from "../algorithms/mergeSort.js";
 import { quickSort } from "../algorithms/quickSort";
 
 export default function Main() {
-  const [array, setArray] = useState(generate([], 100));
-  // const [swapping, setSwapping] = useState([]);
-  // const [currentSorted, setCurrentSorted] = useState([]);
-
+  const [size, setSize] = useState(100);
+  const [array, setArray] = useState(generate([], size));
+  const [speed, setSpeed] = useState(50);
   const [compare, setCompare] = useState(true);
-  const [fnToCall, setFnToCall] = useState({});
 
   const algorithms = [
     ["Merge Sort", mergeSort],
@@ -25,27 +23,29 @@ export default function Main() {
     ["Selection Sort", selectionSort],
   ];
 
-  // useEffect(() => {
-  //   sorting &&
-  //     fnToCall.algo(
-  //       array,
-  //       setArray,
-  //       setSorting,
-  //       funcObj,
-  //       currentSorted,
-  //       setCurrentSorted,
-  //       setSwapping,
-  //       swapping
-  //     );
-  // }, [sorting]);
+  useEffect(() => {
+    setArray(generate([], size));
+  }, [compare]);
 
   return (
     <div className="main_container">
-      <Header />
+      <Header
+        setArray={setArray}
+        setSpeed={setSpeed}
+        setSize={setSize}
+        size={size}
+        compare={compare}
+        setCompare={setCompare}
+      />
       {!compare ? (
         <div className="graph_container">
           <Visualize
-          // array={array}
+            array={array}
+            setArray={setArray}
+            compare={compare}
+            algorithms={algorithms}
+            speed={speed}
+            size={size}
           />
         </div>
       ) : (
@@ -55,6 +55,7 @@ export default function Main() {
             setArray={setArray}
             compare={compare}
             algorithms={algorithms}
+            speed={speed}
           />
         </div>
       )}
