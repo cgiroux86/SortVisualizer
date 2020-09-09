@@ -13,7 +13,6 @@ Algorithms are fun! Ever since studying CS, I have fallen in love with studying 
 
 ## Screenshots
 
-Include logo/demo screenshot etc.
 
 ![Comparison View](https://user-images.githubusercontent.com/59579733/92633471-d4f90480-f2a0-11ea-8502-6e542fd6e195.png)
 
