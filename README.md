@@ -1,4 +1,4 @@
-# SortVisualizer
+![Screen Shot 2020-09-09 at 4 19 22 PM](https://user-images.githubusercontent.com/59579733/92648940-40020580-f2b8-11ea-9b51-3a3697aa8dbc.png)# SortVisualizer
 ### Deployed Version: https://sort-visualizer.vercel.app/
 
 
@@ -15,7 +15,7 @@ Algorithms are fun! Ever since studying CS, I have fallen in love with studying 
 <br/>
 <br/>
 <br/>
-![Single](https://user-images.githubusercontent.com/59579733/92648415-62475380-f2b7-11ea-9266-339db7f265a3.png)
+![Single](https://user-images.githubusercontent.com/59579733/92648940-40020580-f2b8-11ea-9b51-3a3697aa8dbc.png)
 
 ## Tech/framework used
 
