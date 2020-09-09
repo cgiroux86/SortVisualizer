@@ -1,9 +1,6 @@
 # SortVisualizer
 ### Deployed Version: https://sort-visualizer.vercel.app/
 
-## Project title
-
-<!-- A little info about your project and/ or overview that explains **what** the project is about. -->
 
 This project was designed to help users visually comprehend classic sorting algorithms.
 
