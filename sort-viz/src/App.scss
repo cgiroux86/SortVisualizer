@@ -3,6 +3,7 @@
   background: #00638a;
   height: auto;
   text-align: center;
+  color: white;
   border: 2px solid whitesmoke;
   display: flex;
   flex-direction: column;
@@ -79,10 +80,23 @@
   align-items: flex-end;
 }
 .tabs {
-  background: navy;
+  background: white;
+  color: #00778a;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 30%;
-  height: 50%;
+  height: 60%;
+  cursor: pointer;
+}
+.tabs_active {
+  background: #00dbfc;
+  color: white;
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: 60%;
+  cursor: pointer;
 }

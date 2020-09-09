@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "../styles/styled";
 import { generate } from "../functions/generateArray";
 import Typography from "@material-ui/core/Typography";
@@ -11,15 +11,22 @@ export default function Header({
   compare,
   setCompare,
 }) {
+  const [tabs, setTabs] = useState({ single: false, double: true });
+
   function handleSpeedChange(speed) {
     setSpeed(speed);
   }
-  function handleTabChange() {
-    setCompare(!compare);
+
+  function handleTabChange(id) {
+    if (id === "double") {
+      setTabs({ single: false, double: true });
+      setCompare(true);
+    } else {
+      setTabs({ double: false, single: true });
+      setCompare(false);
+    }
   }
-  function getSizeValue(value) {
-    return value;
-  }
+
   return (
     <div className="header">
       <div className="title">Sorting Visualizer</div>
@@ -65,10 +72,18 @@ export default function Header({
           </div>
         </div>
         <div className="tabs_container">
-          <div onClick={handleTabChange} className={compare ? "tabs" : ""}>
+          <div
+            id="single"
+            onClick={(e) => handleTabChange(e.target.id)}
+            className={tabs.single ? "tabs_active" : "tabs"}
+          >
             Single
           </div>
-          <div onClick={handleTabChange} className="tabs">
+          <div
+            id="double"
+            onClick={(e) => handleTabChange(e.target.id)}
+            className={tabs.double ? "tabs_active" : "tabs"}
+          >
             Double
           </div>
         </div>

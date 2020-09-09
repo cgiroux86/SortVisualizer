@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-export default function Visualize({ arr, compare, algorithms, speed, size }) {
+export default function Visualize({
+  arr,
+  compare,
+  algorithms,
+  speed,
+  size,
+  setStartSort,
+  startSort,
+  id,
+}) {
   const [inorder, setInorder] = useState([]);
   const [fnToCall, setFnToCall] = useState({});
   const [array, setArray] = useState(arr);
@@ -15,11 +24,45 @@ export default function Visualize({ arr, compare, algorithms, speed, size }) {
 
   const handleStart = (algo) => {
     setFnToCall({ algo });
-    setSorting(true);
+    if (compare)
+      id === 1
+        ? setStartSort({ ...startSort, arr1: true })
+        : setStartSort({ ...startSort, arr2: true });
+  };
+
+  const fnIsSet = () => {
+    if (compare) {
+      startSort.arr1 &&
+        startSort.arr2 &&
+        fnToCall.algo(
+          array,
+          setArray,
+          setSorting,
+          funcObj,
+          currentSorted,
+          setCurrentSorted,
+          setSwapping,
+          swapping,
+          speed
+        );
+    } else {
+      sorting &&
+        fnToCall.algo(
+          array,
+          setArray,
+          setSorting,
+          funcObj,
+          currentSorted,
+          setCurrentSorted,
+          setSwapping,
+          swapping,
+          speed
+        );
+    }
   };
 
   useEffect(() => {
-    setArray(arr.slice());
+    arr && setArray(arr.slice());
   }, [arr]);
 
   useEffect(() => {
@@ -27,18 +70,19 @@ export default function Visualize({ arr, compare, algorithms, speed, size }) {
   }, [currentSorted]);
 
   useEffect(() => {
-    sorting &&
-      fnToCall.algo(
-        array,
-        setArray,
-        setSorting,
-        funcObj,
-        currentSorted,
-        setCurrentSorted,
-        setSwapping,
-        swapping,
-        speed
-      );
+    fnIsSet();
+    // sorting &&
+    //   fnToCall.algo(
+    //     array,
+    //     setArray,
+    //     setSorting,
+    //     funcObj,
+    //     currentSorted,
+    //     setCurrentSorted,
+    //     setSwapping,
+    //     swapping,
+    //     speed
+    //   );
   }, [sorting]);
 
   return (
@@ -60,7 +104,7 @@ export default function Visualize({ arr, compare, algorithms, speed, size }) {
             <div
               key={i}
               style={{
-                width: compare ? "0.1rem" : "0.5rem",
+                width: "0.5rem",
                 height: el,
                 border: " 1px solid purple",
                 backgroundColor: swapping.includes(i)

@@ -9,6 +9,9 @@ export default function Compare({
   algorithms,
   handleStart,
   speed,
+  setStartSort,
+  startSort,
+  compare,
 }) {
   const [copiedArray1, setCopiedArray1] = useState(array.slice());
   const [copiedArray2, setCopiedArray2] = useState(array.slice());
@@ -31,6 +34,9 @@ export default function Compare({
             algorithms={algorithms}
             handleStart={handleStart}
             speed={speed}
+            setStartSort={setStartSort}
+            compare={compare}
+            startSort={startSort}
           />
         </div>
 
@@ -44,6 +50,9 @@ export default function Compare({
             algorithms={algorithms}
             handleStart={handleStart}
             speed={speed}
+            setStartSort={setStartSort}
+            compare={compare}
+            startSort={startSort}
           />
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Visualize from "./Visualize";
 import Compare from "./Compare";
@@ -14,6 +14,7 @@ export default function Main() {
   const [array, setArray] = useState(generate([], size));
   const [speed, setSpeed] = useState(50);
   const [compare, setCompare] = useState(true);
+  const [startSort, setStartSort] = useState({ arr1: false, arr2: false });
 
   const algorithms = [
     ["Merge Sort", mergeSort],
@@ -22,10 +23,6 @@ export default function Main() {
     ["Quick Sort", quickSort],
     ["Selection Sort", selectionSort],
   ];
-
-  useEffect(() => {
-    setArray(generate([], size));
-  }, [compare]);
 
   return (
     <div className="main_container">
@@ -40,12 +37,13 @@ export default function Main() {
       {!compare ? (
         <div className="graph_container">
           <Visualize
-            array={array}
+            arr={array}
             setArray={setArray}
             compare={compare}
             algorithms={algorithms}
             speed={speed}
             size={size}
+            setStartSort={setStartSort}
           />
         </div>
       ) : (
@@ -56,6 +54,8 @@ export default function Main() {
             compare={compare}
             algorithms={algorithms}
             speed={speed}
+            setStartSort={setStartSort}
+            startSort={startSort}
           />
         </div>
       )}
