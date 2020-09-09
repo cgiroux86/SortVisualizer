@@ -9,6 +9,8 @@ export default function Visualize({
   setStartSort,
   startSort,
   id,
+  ready,
+  setReady,
 }) {
   const [inorder, setInorder] = useState([]);
   const [fnToCall, setFnToCall] = useState({});
@@ -22,12 +24,33 @@ export default function Visualize({
     currentSorted: setCurrentSorted,
   });
 
-  const handleStart = (algo) => {
+  const [active, setActive] = useState({
+    merge: false,
+    bubble: false,
+    insertion: false,
+    quick: false,
+    selection: false,
+  });
+
+  const handleStart = (algo, name) => {
     setFnToCall({ algo });
-    if (compare)
+    const updated = name.split(" ")[0].toLowerCase();
+    const updatedState = {
+      merge: false,
+      bubble: false,
+      insertion: false,
+      quick: false,
+      selection: false,
+    };
+    updatedState[updated] = true;
+    setActive(updatedState);
+    if (compare) {
       id === 1
         ? setStartSort({ ...startSort, arr1: true })
         : setStartSort({ ...startSort, arr2: true });
+    } else {
+      setSorting(true);
+    }
   };
 
   const fnIsSet = () => {
@@ -70,28 +93,24 @@ export default function Visualize({
   }, [currentSorted]);
 
   useEffect(() => {
-    fnIsSet();
-    // sorting &&
-    //   fnToCall.algo(
-    //     array,
-    //     setArray,
-    //     setSorting,
-    //     funcObj,
-    //     currentSorted,
-    //     setCurrentSorted,
-    //     setSwapping,
-    //     swapping,
-    //     speed
-    //   );
-  }, [sorting]);
+    ready && fnIsSet();
+  }, [sorting, startSort, ready]);
 
   return (
     <div>
-      <div className="button_container">
+      <div className={compare ? "button_container" : "single_button"}>
         {algorithms.map((algo) => {
           return (
             <div key={algo[0]}>
-              <div onClick={() => handleStart(algo[1])} className="algo">
+              <div
+                // className="algo_active"
+                onClick={() => handleStart(algo[1], algo[0])}
+                className={
+                  active[algo[0].split(" ")[0].toLowerCase()]
+                    ? "active_algo"
+                    : "algo"
+                }
+              >
                 {algo[0]}
               </div>
             </div>

@@ -15,6 +15,7 @@ export default function Main() {
   const [speed, setSpeed] = useState(50);
   const [compare, setCompare] = useState(true);
   const [startSort, setStartSort] = useState({ arr1: false, arr2: false });
+  const [ready, setReady] = useState(false);
 
   const algorithms = [
     ["Merge Sort", mergeSort],
@@ -33,6 +34,8 @@ export default function Main() {
         size={size}
         compare={compare}
         setCompare={setCompare}
+        ready={ready}
+        setReady={setReady}
       />
       {!compare ? (
         <div className="graph_container">
@@ -44,6 +47,8 @@ export default function Main() {
             speed={speed}
             size={size}
             setStartSort={setStartSort}
+            setCompare={setCompare}
+            ready={ready}
           />
         </div>
       ) : (
@@ -56,6 +61,7 @@ export default function Main() {
             speed={speed}
             setStartSort={setStartSort}
             startSort={startSort}
+            ready={ready}
           />
         </div>
       )}

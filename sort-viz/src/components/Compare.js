@@ -12,11 +12,14 @@ export default function Compare({
   setStartSort,
   startSort,
   compare,
+  ready,
+  setReady,
 }) {
   const [copiedArray1, setCopiedArray1] = useState(array.slice());
   const [copiedArray2, setCopiedArray2] = useState(array.slice());
 
   useEffect(() => {
+    console.log("array is changing");
     setCopiedArray1(array.slice());
     setCopiedArray2(array.slice());
   }, [array]);
@@ -37,6 +40,8 @@ export default function Compare({
             setStartSort={setStartSort}
             compare={compare}
             startSort={startSort}
+            ready={ready}
+            setReady={setReady}
           />
         </div>
 
@@ -53,6 +58,8 @@ export default function Compare({
             setStartSort={setStartSort}
             compare={compare}
             startSort={startSort}
+            ready={ready}
+            setReady={setReady}
           />
         </div>
       </div>

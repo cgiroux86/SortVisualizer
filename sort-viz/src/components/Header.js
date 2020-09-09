@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "../styles/styled";
 import { generate } from "../functions/generateArray";
 import Typography from "@material-ui/core/Typography";
@@ -10,12 +10,10 @@ export default function Header({
   size,
   compare,
   setCompare,
+  ready,
+  setReady,
 }) {
   const [tabs, setTabs] = useState({ single: false, double: true });
-
-  function handleSpeedChange(speed) {
-    setSpeed(speed);
-  }
 
   function handleTabChange(id) {
     if (id === "double") {
@@ -27,15 +25,31 @@ export default function Header({
     }
   }
 
+  function isReady() {
+    setReady(true);
+    console.log("isready", ready);
+  }
+
   return (
     <div className="header">
       <div className="title">Sorting Visualizer</div>
       <div className="options">
         <div className="slider_wrapper">
-          <div>
-            <Button onClick={() => setArray(generate([], 100))}>
-              New List
-            </Button>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              width: "30%",
+            }}
+          >
+            <div>
+              <Button onClick={() => setArray(generate([], 100))}>
+                New List
+              </Button>
+            </div>
+            <div>
+              <Button onClick={isReady}>Start Sort!</Button>
+            </div>
           </div>
           <div style={{ width: "30%", position: "relative", left: 100 }}>
             <Typography id="discrete-slider-small-steps" gutterBottom>
@@ -44,7 +58,7 @@ export default function Header({
             <Slider
               style={{ width: "40%", color: "white" }}
               defaultValue={50}
-              getAriaValueText={handleSpeedChange}
+              onChangeCommitted={(e, val) => setSpeed(val)}
               aria-labelledby="discrete-slider-small-steps"
               step={200}
               marks
@@ -59,9 +73,9 @@ export default function Header({
             </Typography>
             <Slider
               style={{ width: "40%", color: "white" }}
-              defaultValue={50}
-              onChange={(e, val) => setSize(val)}
-              onDragStop={(e) => setArray(size)}
+              defaultValue={100}
+              ii
+              onChangeCommitted={(e, val) => setArray(generate([], val))}
               aria-labelledby="discrete-slider-small-steps"
               step={20}
               marks

@@ -24,14 +24,22 @@
 }
 
 .graph_container {
-  border: 1px solid red;
-  margin: 5% auto;
+  box-shadow: 5px 5px 5px 6px grey;
+  width: 80%;
+  margin: 2% auto;
 }
 .button_container {
   display: flex;
   justify-content: space-evenly;
-  width: 90%;
+  width: 100%;
   margin: 3% auto;
+}
+.single_button {
+  display: flex;
+  justify-content: space-evenly;
+  width: 70%;
+  padding: 2% 0;
+  margin: 0 auto;
 }
 .algo {
   font-size: 1rem;
@@ -60,17 +68,15 @@
 .options {
   display: flex;
   justify-content: space-evenly;
-  border: 1px solid magenta;
   width: 90%;
   margin: 0 auto;
 }
 .slider_wrapper {
-  border: 1px solid lime;
   display: flex;
   justify-content: space-around;
   align-items: center;
   position: relative;
-  left: 150px;
+  left: 100px;
   width: 50%;
 }
 .tabs_container {
@@ -98,5 +104,15 @@
   justify-content: center;
   width: 30%;
   height: 60%;
+  cursor: pointer;
+}
+
+.active_algo {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background: rgb(0, 170, 139);
+  border-radius: 5px;
+  padding: 0.3rem;
   cursor: pointer;
 }
