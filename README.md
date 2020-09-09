@@ -8,7 +8,7 @@ This project was designed to help users visually comprehend classic sorting algo
 
 ## Motivation
 
-<!-- A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists. -->
+Algorithms are fun! Ever since studying CS, I have fallen in love with studying and implementing algorithms to solve real life problems. Classic sorting algorithms are nothing new, neither are visualizations. However, you don't see many applications with the ability to compare these algorithms side by side. It was an excellent way to demonstrate real life problem solving using React and further my understanding of classic sorting algorithms.
 
 ## Screenshots
 
