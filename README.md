@@ -14,8 +14,8 @@ This project was designed to help users visually comprehend classic sorting algo
 
 Include logo/demo screenshot etc.
 
-![Screen Shot 1](/images/screenShot1.png)
-![Scren Shot 2](/images/screenShot2.png)
+![Screen Shot 1](https://github.com/cgiroux86/SortVisualizer/raw/merge-sort/images/screenShot1.png)
+![Scren Shot 2](https://github.com/cgiroux86/SortVisualizer/raw/merge-sort/images/screenShot2.png)
 
 ## Tech/framework used
 
