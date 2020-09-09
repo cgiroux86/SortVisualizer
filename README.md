@@ -1,5 +1,5 @@
 # SortVisualizer
-## Deployed Version: https://sort-visualizer.vercel.app/
+### Deployed Version: https://sort-visualizer.vercel.app/
 
 ## Project title
 
