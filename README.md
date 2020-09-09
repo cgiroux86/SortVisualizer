@@ -14,8 +14,7 @@ This project was designed to help users visually comprehend classic sorting algo
 
 Include logo/demo screenshot etc.
 
-![Screen Shot 1](https://user-images.githubusercontent.com/59579733/92633160-5d2ada00-f2a0-11ea-80d8-f9bfd3a40745.png)
-![Scren Shot 2]!(https://user-images.githubusercontent.com/59579733/92633256-83507a00-f2a0-11ea-845a-4fe80e2a4167.png)
+![Comparison View](https://user-images.githubusercontent.com/59579733/92633471-d4f90480-f2a0-11ea-8502-6e542fd6e195.png)
 
 ## Tech/framework used
 
