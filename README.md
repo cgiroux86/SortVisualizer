@@ -1,4 +1,5 @@
-![Screen Shot 2020-09-09 at 4 19 22 PM](https://user-images.githubusercontent.com/59579733/92648940-40020580-f2b8-11ea-9b51-3a3697aa8dbc.png)# SortVisualizer
+# SortVisualizer
+
 ### Deployed Version: https://sort-visualizer.vercel.app/
 
 
