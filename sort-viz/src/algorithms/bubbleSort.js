@@ -7,7 +7,8 @@ export const bubbleSort = (
   setCurrentSorted,
   setSwapping,
   swapping,
-  speed
+  speed,
+  setComparing
 ) => {
   let copy = [...arr];
   let sorted = false;
@@ -40,7 +41,8 @@ export const bubbleSort = (
     setSwapping,
     swapping,
     arr,
-    speed
+    speed,
+    setComparing
   );
   return copy;
 };
@@ -55,7 +57,8 @@ function handleTimeout(
   setSwapping,
   swapping,
   arr,
-  speed
+  speed,
+  setComparing
 ) {
   if (!updates.length) {
     sorting(false);
@@ -71,7 +74,8 @@ function handleTimeout(
     currentSorted,
     setCurrentSorted,
     setSwapping,
-    swapping
+    swapping,
+    setComparing
   );
   setTimeout(() => {
     handleTimeout(
@@ -84,7 +88,8 @@ function handleTimeout(
       setSwapping,
       swapping,
       arr,
-      speed
+      speed,
+      setComparing
     );
   }, speed);
 }
@@ -95,20 +100,21 @@ function funcToExec(
   currentSorted,
   setCurrentSorted,
   setSwapping,
-  swapping
+  swapping,
+  setComparing
 ) {
   const firstItem = updates[0];
   if (firstItem.length > 3) {
     return func.setArr(updates.shift());
   }
-  if (firstItem.length === 0 || firstItem.length === 3) {
+  if (firstItem.length === 3 || !firstItem.length) {
     return func.setSwapping(updates.shift());
   }
   if (firstItem.length === 2 && firstItem[0] === true) {
     setCurrentSorted(currentSorted.concat(updates.shift()));
     return;
   } else if (firstItem.length == 2) {
-    setSwapping(updates.shift());
+    setComparing(updates.shift());
     return;
   }
 }

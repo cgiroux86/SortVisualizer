@@ -18,6 +18,7 @@ export default function Visualize({
   const [swapping, setSwapping] = useState([]);
   const [currentSorted, setCurrentSorted] = useState([]);
   const [sorting, setSorting] = useState(false);
+  const [comparing, setComparing] = useState([]);
   const [funcObj, setFuncObj] = useState({
     setArr: setArray,
     setSwapping: setSwapping,
@@ -66,7 +67,8 @@ export default function Visualize({
           setCurrentSorted,
           setSwapping,
           swapping,
-          speed
+          speed,
+          setComparing
         );
     } else {
       sorting &&
@@ -79,7 +81,8 @@ export default function Visualize({
           setCurrentSorted,
           setSwapping,
           swapping,
-          speed
+          speed,
+          setComparing
         );
     }
   };
@@ -118,6 +121,7 @@ export default function Visualize({
         })}
       </div>
       <div className="container">
+        {console.log(swapping, "swapping")}
         {array &&
           array.map((el, i) => (
             <div
@@ -126,10 +130,12 @@ export default function Visualize({
                 width: "0.5rem",
                 height: el,
                 border: " 1px solid purple",
-                backgroundColor: swapping.includes(i)
+                backgroundColor: comparing.includes(i)
                   ? "yellow"
                   : inorder.includes(i)
                   ? "lime"
+                  : swapping.includes(i)
+                  ? "purple"
                   : "#00dbfc",
               }}
             ></div>
