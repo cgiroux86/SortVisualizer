@@ -49,9 +49,10 @@ export default function Visualize({
       id === 1
         ? setStartSort({ ...startSort, arr1: true })
         : setStartSort({ ...startSort, arr2: true });
-    } else {
-      setSorting(true);
     }
+    // else {
+    setSorting(true);
+    // }
   };
 
   const fnIsSet = () => {
@@ -88,16 +89,19 @@ export default function Visualize({
   };
 
   useEffect(() => {
-    arr && setArray(arr.slice());
+    if (arr) {
+      setArray(arr.slice());
+      setInorder([]);
+    }
   }, [arr]);
 
-  useEffect(() => {
-    setInorder([...currentSorted, ...inorder]);
-  }, [currentSorted]);
+  // useEffect(() => {
+  //   setInorder([...currentSorted, ...inorder]);
+  // }, [currentSorted]);
 
   useEffect(() => {
-    ready && fnIsSet();
-  }, [sorting, startSort, ready]);
+    ready && sorting && fnIsSet();
+  }, [startSort, ready, sorting]);
 
   return (
     <div>
@@ -121,7 +125,7 @@ export default function Visualize({
         })}
       </div>
       <div className="container">
-        {console.log(swapping, "swapping")}
+        {console.log(inorder)}
         {array &&
           array.map((el, i) => (
             <div
@@ -135,7 +139,7 @@ export default function Visualize({
                   : inorder.includes(i)
                   ? "lime"
                   : swapping.includes(i)
-                  ? "purple"
+                  ? "magenta"
                   : "#00dbfc",
               }}
             ></div>

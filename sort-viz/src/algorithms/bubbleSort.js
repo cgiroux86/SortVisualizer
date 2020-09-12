@@ -108,12 +108,14 @@ function funcToExec(
     return func.setArr(updates.shift());
   }
   if (firstItem.length === 3 || !firstItem.length) {
+    setComparing([]);
     return func.setSwapping(updates.shift());
   }
   if (firstItem.length === 2 && firstItem[0] === true) {
     setCurrentSorted(currentSorted.concat(updates.shift()));
     return;
   } else if (firstItem.length == 2) {
+    func.setSwapping([]);
     setComparing(updates.shift());
     return;
   }

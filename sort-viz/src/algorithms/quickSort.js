@@ -8,11 +8,13 @@ export function quickSort(
   currentSorted,
   setCurrentSorted,
   setSwapping,
-  swapping
+  swapping,
+  speed,
+  setComparing
 ) {
   let arr = array.slice();
   let sorted = _quickSort(arr, 0, arr.length - 1);
-  handleTimeOut(funcObj, setSorting, arr);
+  handleTimeOut(funcObj, setSorting, arr, speed, setComparing);
   return sorted;
 }
 function partition(items, left, right) {
@@ -21,9 +23,11 @@ function partition(items, left, right) {
     j = right;
   while (i <= j) {
     while (items[i] < pivot) {
+      updates.push([i, j]);
       i++;
     }
     while (items[j] > pivot) {
+      updates.push([j, pivot]);
       j--;
     }
     if (i <= j) {
@@ -34,6 +38,7 @@ function partition(items, left, right) {
       i++;
       j--;
     }
+    updates.push([pivot]);
     updates.push(items.slice());
   }
   return i;
@@ -54,13 +59,19 @@ function _quickSort(items, left, right) {
   }
 }
 
-function handleTimeOut(funcObj, sorting, arr) {
+function handleTimeOut(funcObj, sorting, arr, speed, setComparing) {
   function fnToCall(array) {
-    return array[0].length > 3
-      ? funcObj.setArr(array.shift())
-      : array[0].length === 3 && array[0][2] === true
-      ? funcObj.setSwapping(array.shift())
-      : funcObj.currentSorted(array.shift());
+    if (array[0].length > 3) {
+      funcObj.setArr(array.shift());
+    } else if (array[0].length === 3 && array[0][2] === true) {
+      setComparing([]);
+      funcObj.setSwapping(array.shift());
+    } else if (array[0].length === 2) {
+      funcObj.setSwapping([]);
+      setComparing(array.shift());
+    } else {
+      funcObj.currentSorted(array.shift());
+    }
   }
   if (!updates.length) {
     setTimeout(() => {
@@ -72,8 +83,8 @@ function handleTimeOut(funcObj, sorting, arr) {
   }
   fnToCall(updates);
   setTimeout(() => {
-    handleTimeOut(funcObj, sorting, arr);
-  }, 50);
+    handleTimeOut(funcObj, sorting, arr, speed, setComparing);
+  }, speed);
 }
 // let array = [6, 8, 3, 2, 2, 1, 5, 7, 0, 9];
 // console.log(quickSort(array, 0, array.length - 1));

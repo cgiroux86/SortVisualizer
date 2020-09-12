@@ -24,6 +24,7 @@ export function mergeSort(
     funcObj
   );
   handleTimeout(updates, funcObj, array, setSorting, speed, setComparing);
+  return results;
 }
 
 function _mergeSort(arr, updates, start, end, startArr, sorting, funcObj) {
@@ -103,6 +104,7 @@ function handleTimeout(updates, funcObj, arr, sorting, speed, setComparing) {
       funcObj.setSwapping([]);
       sorting(false);
     }, 200);
+    return;
   } else {
     const fn = fnToCall(updates);
     const shifted = updates.shift();
