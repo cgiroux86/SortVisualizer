@@ -7,22 +7,24 @@ export const insertionSort = (
   setCurrentSorted,
   setSwapping,
   swapping,
-  speed
+  speed,
+  setComparing
 ) => {
   const updates = [];
   const copy = [...arr];
   for (let i = 0; i < arr.length; i++) {
     const current = copy[i];
     let j = i;
-    updates.push([i]);
+    // updates.push([i]);
     while (j > 0 && current <= copy[j - 1]) {
       copy[j] = copy[j - 1];
-      updates.push([i, j]);
       j--;
+      updates.push([i, j]);
     }
     copy[j] = current;
     updates.push([i, j, true]);
     updates.push(copy.slice(0));
+    updates.push([]);
   }
   handleTimeout(
     updates,
@@ -34,7 +36,8 @@ export const insertionSort = (
     setSwapping,
     swapping,
     arr,
-    speed
+    speed,
+    setComparing
   );
   return copy;
 };
@@ -48,7 +51,8 @@ function handleTimeout(
   setSwapping,
   swapping,
   arr,
-  speed
+  speed,
+  setComparing
 ) {
   if (!updates.length) {
     sorting(false);
@@ -62,7 +66,8 @@ function handleTimeout(
     currentSorted,
     setCurrentSorted,
     setSwapping,
-    swapping
+    swapping,
+    setComparing
   );
   setTimeout(() => {
     handleTimeout(
@@ -75,7 +80,8 @@ function handleTimeout(
       setSwapping,
       swapping,
       arr,
-      speed
+      speed,
+      setComparing
     );
   }, speed);
 }
@@ -86,22 +92,20 @@ function funcToExec(
   currentSorted,
   setCurrentSorted,
   setSwapping,
-  swapping
+  swapping,
+  setComparing
 ) {
   const firstItem = updates[0];
   if (firstItem.length > 3) {
-    console.log("first item", firstItem);
     func.setArr(updates.shift());
-    return;
-  } else if (firstItem.length === 0 || firstItem.length === 3) {
+  } else if (firstItem.length === 3) {
     func.setSwapping(updates.shift());
-    return;
+    setComparing([]);
   } else if (firstItem.length === 2 && firstItem[0] === true) {
     setCurrentSorted(currentSorted.concat(updates.shift()));
-    return;
-  } else if (firstItem.length == 2) {
-    setSwapping(updates.shift());
-    return;
+  } else if (firstItem.length === 2) {
+    setComparing(updates.shift());
+    setSwapping([]);
   } else {
     updates.shift();
   }

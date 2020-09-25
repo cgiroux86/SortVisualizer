@@ -7,7 +7,8 @@ export function mergeSort(
   setCurrentSorted,
   setSwapping,
   swapping,
-  speed
+  speed,
+  setComparing
 ) {
   const array = arr.slice();
   const updates = [];
@@ -22,8 +23,8 @@ export function mergeSort(
     setSorting,
     funcObj
   );
-  console.log("func obj", funcObj);
-  handleTimeout(updates, funcObj, array, setSorting, speed);
+  handleTimeout(updates, funcObj, array, setSorting, speed, setComparing);
+  return results;
 }
 
 function _mergeSort(arr, updates, start, end, startArr, sorting, funcObj) {
@@ -80,12 +81,22 @@ function merge(arr1, arr2, start, end, startArr, updates) {
   updates.push([]);
   return arr.concat(arr1).concat(arr2);
 }
-function handleTimeout(updates, funcObj, arr, sorting, speed) {
-  console.log("func obj", funcObj);
+function handleTimeout(updates, funcObj, arr, sorting, speed, setComparing) {
+  console.log("func obj", setComparing);
   function fnToCall(updated) {
-    if (updated[0].length > 3) return "SET";
-    if (updated[0].length === 3 && updated[0][2] === true) return "SWAP";
-    if (updated[0].length === 2 && updated[0][0]) return "SORTED";
+    if (updated[0].length > 3) {
+      setComparing([]);
+      funcObj.setSwapping([]);
+      return "SET";
+    }
+    if (updated[0].length === 3 && updated[0][2] === true) {
+      setComparing([]);
+      // funcObj.setSwapping(updates[0]);
+      return "SWAP";
+    }
+    if (updated[0].length === 2) {
+      return "SORTED";
+    }
   }
   if (!updates.length) {
     setTimeout(() => {
@@ -93,6 +104,7 @@ function handleTimeout(updates, funcObj, arr, sorting, speed) {
       funcObj.setSwapping([]);
       sorting(false);
     }, 200);
+    return;
   } else {
     const fn = fnToCall(updates);
     const shifted = updates.shift();
@@ -105,14 +117,15 @@ function handleTimeout(updates, funcObj, arr, sorting, speed) {
         shifted[shifted.length - 1],
       ]);
     } else {
+      funcObj.setSwapping([]);
       fn === "SWAP"
         ? funcObj.setSwapping(shifted)
         : fn === "SORTED"
-        ? funcObj.currentSorted(shifted)
-        : funcObj.setSwapping(shifted);
+        ? setComparing(shifted)
+        : setComparing(shifted);
     }
   }
   setTimeout(() => {
-    handleTimeout(updates, funcObj, arr, sorting, speed);
+    handleTimeout(updates, funcObj, arr, sorting, speed, setComparing);
   }, speed);
 }

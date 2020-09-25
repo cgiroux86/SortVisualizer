@@ -18,6 +18,7 @@ export default function Visualize({
   const [swapping, setSwapping] = useState([]);
   const [currentSorted, setCurrentSorted] = useState([]);
   const [sorting, setSorting] = useState(false);
+  const [comparing, setComparing] = useState([]);
   const [funcObj, setFuncObj] = useState({
     setArr: setArray,
     setSwapping: setSwapping,
@@ -48,9 +49,10 @@ export default function Visualize({
       id === 1
         ? setStartSort({ ...startSort, arr1: true })
         : setStartSort({ ...startSort, arr2: true });
-    } else {
-      setSorting(true);
     }
+    // else {
+    setSorting(true);
+    // }
   };
 
   const fnIsSet = () => {
@@ -66,7 +68,8 @@ export default function Visualize({
           setCurrentSorted,
           setSwapping,
           swapping,
-          speed
+          speed,
+          setComparing
         );
     } else {
       sorting &&
@@ -79,22 +82,26 @@ export default function Visualize({
           setCurrentSorted,
           setSwapping,
           swapping,
-          speed
+          speed,
+          setComparing
         );
     }
   };
 
   useEffect(() => {
-    arr && setArray(arr.slice());
+    if (arr) {
+      setArray(arr.slice());
+      setInorder([]);
+    }
   }, [arr]);
 
-  useEffect(() => {
-    setInorder([...currentSorted, ...inorder]);
-  }, [currentSorted]);
+  // useEffect(() => {
+  //   setInorder([...currentSorted, ...inorder]);
+  // }, [currentSorted]);
 
   useEffect(() => {
-    ready && fnIsSet();
-  }, [sorting, startSort, ready]);
+    ready && sorting && fnIsSet();
+  }, [startSort, ready, sorting]);
 
   return (
     <div>
@@ -118,6 +125,7 @@ export default function Visualize({
         })}
       </div>
       <div className="container">
+        {console.log(inorder)}
         {array &&
           array.map((el, i) => (
             <div
@@ -126,10 +134,12 @@ export default function Visualize({
                 width: "0.5rem",
                 height: el,
                 border: " 1px solid purple",
-                backgroundColor: swapping.includes(i)
+                backgroundColor: comparing.includes(i)
                   ? "yellow"
                   : inorder.includes(i)
                   ? "lime"
+                  : swapping.includes(i)
+                  ? "magenta"
                   : "#00dbfc",
               }}
             ></div>
